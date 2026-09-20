@@ -5,7 +5,7 @@ class Main {
     static HashSet<Integer> rollNumbers = new HashSet<>();
 
 
-    // Method to get valid mark between 0 and 100
+ 
     static int readMark(Scanner sc, String subject) {
 
         int mark;
@@ -35,7 +35,7 @@ class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        // ArrayList stores all Student objects
+       
         ArrayList<Student> students = new ArrayList<>();
 
 
