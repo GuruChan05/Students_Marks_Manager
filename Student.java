@@ -1,5 +1,6 @@
 class Student {
 
+    int rollNumber;
     String name;
 
     int java;
@@ -8,9 +9,8 @@ class Student {
     int dbms;
     int ml;
 
-
-    // Constructor
     Student(
+            int rollNumber,
             String name,
             int java,
             int python,
@@ -19,6 +19,7 @@ class Student {
             int ml
     ) {
 
+        this.rollNumber = rollNumber;
         this.name = name;
         this.java = java;
         this.python = python;
@@ -27,22 +28,16 @@ class Student {
         this.ml = ml;
     }
 
-
-    // Calculate total
     int getTotal() {
 
         return java + python + dsa + dbms + ml;
     }
 
-
-    // Calculate average
     double getAverage() {
 
         return getTotal() / 5.0;
     }
 
-
-    // Calculate grade
     String getGrade() {
 
         double average = getAverage();
@@ -67,8 +62,6 @@ class Student {
         }
     }
 
-
-    // Check pass or fail
     boolean isPass() {
 
         return java >= 40 &&
@@ -78,33 +71,30 @@ class Student {
                ml >= 40;
     }
 
-
-    // Display student details
     void display() {
 
         System.out.println("\n-------------------------");
 
-        System.out.println("Student: " + name);
+        System.out.println("Roll Number : " + rollNumber);
+        System.out.println("Student     : " + name);
 
-        System.out.println("Java   : " + java);
-        System.out.println("Python : " + python);
-        System.out.println("DSA    : " + dsa);
-        System.out.println("DBMS   : " + dbms);
-        System.out.println("ML     : " + ml);
+        System.out.println("Java        : " + java);
+        System.out.println("Python      : " + python);
+        System.out.println("DSA         : " + dsa);
+        System.out.println("DBMS        : " + dbms);
+        System.out.println("ML          : " + ml);
 
         System.out.println("-------------------------");
 
-        System.out.println("Total   : " + getTotal() + " / 500");
-
-        System.out.println("Average : " + getAverage());
-
-        System.out.println("Grade   : " + getGrade());
+        System.out.println("Total       : " + getTotal() + " / 500");
+        System.out.println("Average     : " + getAverage());
+        System.out.println("Grade       : " + getGrade());
 
         if (isPass()) {
-            System.out.println("Result  : PASS");
+            System.out.println("Result      : PASS");
         }
         else {
-            System.out.println("Result  : FAIL");
+            System.out.println("Result      : FAIL");
         }
 
         System.out.println("-------------------------");
