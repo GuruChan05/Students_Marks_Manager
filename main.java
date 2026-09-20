@@ -2,17 +2,27 @@ import java.util.*;
 
 class Main {
 
+    static HashSet<Integer> rollNumbers = new HashSet<>();
+
+
     // Method to get valid mark between 0 and 100
     static int readMark(Scanner sc, String subject) {
 
         int mark;
 
         do {
-            System.out.print("Enter " + subject + " mark (0-100): ");
+
+            System.out.print(
+                    "Enter " + subject + " mark (0-100): "
+            );
+
             mark = sc.nextInt();
 
             if (mark < 0 || mark > 100) {
-                System.out.println("Invalid mark! Please enter between 0 and 100.");
+
+                System.out.println(
+                        "Invalid mark! Please enter between 0 and 100."
+                );
             }
 
         } while (mark < 0 || mark > 100);
@@ -25,11 +35,14 @@ class Main {
 
         Scanner sc = new Scanner(System.in);
 
+        // ArrayList stores all Student objects
         ArrayList<Student> students = new ArrayList<>();
+
 
         while (true) {
 
             System.out.println("\n===== STUDENT MARKS MANAGER =====");
+
             System.out.println("1. Add Student");
             System.out.println("2. View Students");
             System.out.println("3. Search Student");
@@ -38,15 +51,41 @@ class Main {
             System.out.println("6. Exit");
 
             System.out.print("Enter your choice: ");
+
             int choice = sc.nextInt();
             sc.nextLine();
 
 
             switch (choice) {
-                case 1 -> {
-                    System.out.print("Enter student name: ");
-                    String name = sc.nextLine();
 
+
+                case 1 -> {
+                    System.out.print("Enter roll number: ");
+
+                    int rollNumber = sc.nextInt();
+                    sc.nextLine();
+                    
+                    
+                  
+                    if (rollNumbers.contains(rollNumber)) {
+
+                        System.out.println(
+                                "Roll number already exists!"
+                        );
+
+                        System.out.println(
+                                "Student not added."
+                        );
+
+                        break;
+                    }
+                    
+                    
+                    System.out.print("Enter student name: ");
+
+                    String name = sc.nextLine();
+                    
+                    
                     int java = readMark(sc, "Java");
 
                     int python = readMark(sc, "Python");
@@ -58,7 +97,9 @@ class Main {
                     int ml = readMark(sc, "ML");
                     
                     
+                  
                     Student student = new Student(
+                            rollNumber,
                             name,
                             java,
                             python,
@@ -66,43 +107,68 @@ class Main {
                             dbms,
                             ml
                     );
-
+                    
+                    
+                   
                     students.add(student);
-
-                    System.out.println("\nStudent added successfully!");
+                    
+               
+                    rollNumbers.add(rollNumber);
+                    
+                    
+                    System.out.println(
+                            "\nStudent added successfully!"
+                    );
                 }
+
                 case 2 -> {
                     if (students.isEmpty()) {
 
-                        System.out.println("\nNo students available.");
+                        System.out.println(
+                                "\nNo students available."
+                        );
 
-                    } else {
+                    }
+                    else {
 
-                        System.out.println("\n===== ALL STUDENTS =====");
+                        System.out.println(
+                                "\n===== ALL STUDENTS ====="
+                        );
 
                         for (Student s : students) {
+
                             s.display();
                         }
                     }
                 }
+
                 case 3 -> {
                     if (students.isEmpty()) {
 
-                        System.out.println("\nNo students available.");
+                        System.out.println(
+                                "\nNo students available."
+                        );
 
-                    } else {
+                    }
+                    else {
 
-                        System.out.print("Enter student name to search: ");
+                        System.out.print(
+                                "Enter student name to search: "
+                        );
 
                         String searchName = sc.nextLine();
 
                         boolean found = false;
-
+                        
+                        
+                    
                         for (Student s : students) {
 
                             if (s.name.equalsIgnoreCase(searchName)) {
 
-                                System.out.println("\nStudent Found!");
+                                System.out.println(
+                                        "\nStudent Found!"
+                                );
 
                                 s.display();
 
@@ -111,43 +177,63 @@ class Main {
                                 break;
                             }
                         }
-
+                        
+                        
                         if (!found) {
-                            System.out.println("Student not found.");
+
+                            System.out.println(
+                                    "Student not found."
+                            );
                         }
                     }
                 }
+
+
                 case 4 -> {
                     if (students.isEmpty()) {
 
-                        System.out.println("\nNo students available.");
+                        System.out.println(
+                                "\nNo students available."
+                        );
 
-                    } else {
+                    }
+                    else {
 
                         int totalMarks = 0;
-
+                        
+                        
                         for (Student s : students) {
 
                             totalMarks += s.getTotal();
                         }
-
+                        
+                        
                         double classAverage =
                                 (double) totalMarks / students.size();
-
+                        
+                        
                         System.out.println(
-                                "\nClass Average = " + classAverage
+                                "\nClass Average = "
+                                        + classAverage
                         );
                     }
                 }
+
+
+
                 case 5 -> {
                     if (students.isEmpty()) {
 
-                        System.out.println("\nNo students available.");
+                        System.out.println(
+                                "\nNo students available."
+                        );
 
-                    } else {
+                    }
+                    else {
 
                         Student top = students.get(0);
-
+                        
+                        
                         for (Student s : students) {
 
                             if (s.getTotal() > top.getTotal()) {
@@ -155,12 +241,17 @@ class Main {
                                 top = s;
                             }
                         }
-
-                        System.out.println("\n===== TOP STUDENT =====");
+                        
+                        
+                        System.out.println(
+                                "\n===== TOP STUDENT ====="
+                        );
 
                         top.display();
                     }
                 }
+
+
                 case 6 -> {
                     System.out.println(
                             "\nThank you for using Student Marks Manager!"
@@ -170,11 +261,12 @@ class Main {
 
                     return;
                 }
+
+
                 default -> System.out.println(
                             "\nInvalid choice. Please try again."
                     );
             }
-        
-                    }
+        }
     }
 }
